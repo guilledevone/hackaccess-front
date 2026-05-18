@@ -1,0 +1,68 @@
+<a href="#main-content" class="skip-link">Saltar al formulari</a>
+
+<app-toast></app-toast>
+
+<main id="main-content" class="register" role="main">
+    <header class="register__header">
+        <a routerLink="/" class="back-link" aria-label="Tornar al llistat de participants">← Tornar</a>
+        <h1>Registrar nou participant</h1>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" novalidate>
+        <fieldset>
+            <legend class="sr-only">Dades del participant</legend>
+
+            <div class="field">
+                <label for="nom">Nom <span aria-hidden="true" class="required">*</span></label>
+                <input id="nom" type="text" formControlName="nom" [attr.aria-invalid]="isInvalid('nom')"
+                    [attr.aria-describedby]="isInvalid('nom') ? 'nom-error' : null" autocomplete="given-name" />
+                @if (isInvalid('nom')) {
+                <span id="nom-error" class="error" role="alert">{{ getError('nom') }}</span>
+                }
+            </div>
+
+            <div class="field">
+                <label for="cognom">Cognom <span aria-hidden="true" class="required">*</span></label>
+                <input id="cognom" type="text" formControlName="cognom" [attr.aria-invalid]="isInvalid('cognom')"
+                    [attr.aria-describedby]="isInvalid('cognom') ? 'cognom-error' : null" autocomplete="family-name" />
+                @if (isInvalid('cognom')) {
+                <span id="cognom-error" class="error" role="alert">{{ getError('cognom') }}</span>
+                }
+            </div>
+
+            <div class="field">
+                <label for="email">Correu electronic <span aria-hidden="true" class="required">*</span></label>
+                <input id="email" type="email" formControlName="email" [attr.aria-invalid]="isInvalid('email')"
+                    [attr.aria-describedby]="isInvalid('email') ? 'email-error' : null" autocomplete="email" />
+                @if (isInvalid('email')) {
+                <span id="email-error" class="error" role="alert">{{ getError('email') }}</span>
+                }
+            </div>
+
+            <div class="field">
+                <label for="tipus_entrada">Tipus d'entrada <span aria-hidden="true" class="required">*</span></label>
+                <select id="tipus_entrada" formControlName="tipus_entrada"
+                    [attr.aria-invalid]="isInvalid('tipus_entrada')">
+                    <option value="Presencial">Presencial</option>
+                    <option value="Online">Online</option>
+                    <option value="Mentor">Mentor</option>
+                </select>
+            </div>
+
+            <div class="field field--checkbox">
+                <input id="necessitats_especials" type="checkbox" formControlName="necessitats_especials" />
+                <label for="necessitats_especials">
+                    Requereix adaptacions d'accessibilitat
+                    <span class="hint">(mobilitat reduida, sensorial, cognitiva, etc.)</span>
+                </label>
+            </div>
+        </fieldset>
+
+        <div class="actions">
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid && form.touched">
+                Registrar participant
+            </button>
+            <a routerLink="/" class="btn btn-secondary">Cancel·lar</a>
+        </div>
+    </form>
+</main>

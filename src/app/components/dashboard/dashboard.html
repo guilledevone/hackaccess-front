@@ -1,0 +1,84 @@
+<!-- Skip link para navegación por teclado -->
+<a href="#main-content" class="skip-link">Saltar al contingut principal</a>
+
+<app-toast></app-toast>
+
+<main id="main-content" class="dashboard" role="main">
+    <header class="dashboard__header">
+        <h1>HackAccess — Llistat de participants</h1>
+        <a routerLink="/register" class="btn btn-primary" aria-label="Registrar nou participant">
+            + Nou participant
+        </a>
+    </header>
+
+    <!-- KPIs estadísticos -->
+    <section class="kpis" aria-label="Estadistiques del hackathon">
+        <article class="kpi">
+            <span class="kpi__value" aria-label="Total participants">{{ service.total() }}</span>
+            <span class="kpi__label">Participants totals</span>
+        </article>
+        <article class="kpi kpi--accent">
+            <span class="kpi__value" aria-label="Amb necessitats especials">{{ service.totalNecessitats() }}</span>
+            <span class="kpi__label">Necessitats especials</span>
+        </article>
+        <article class="kpi">
+            <span class="kpi__value">{{ service.totalPresencial() }}</span>
+            <span class="kpi__label">Presencials</span>
+        </article>
+    </section>
+
+    @if (service.loading()) {
+    <p class="status" role="status" aria-live="polite">Carregant participants...</p>
+    } @else if (service.error()) {
+    <p class="status status--error" role="alert">{{ service.error() }}</p>
+    } @else if (service.participants().length === 0) {
+    <div class="empty-state">
+        <p>No hi ha participants registrats.</p>
+        <a routerLink="/register" class="btn btn-primary">Registrar el primer participant</a>
+    </div>
+    } @else {
+    <div class="table-wrapper">
+        <table class="data-table" role="table" aria-label="Participants inscrits al hackathon">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Tipus</th>
+                    <th scope="col">Necessitats especials</th>
+                    <th scope="col">Registrat</th>
+                    <th scope="col">Accions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (p of service.participants(); track p.id) {
+                <tr>
+                    <td class="cell-name">{{ p.nom_complet }}</td>
+                    <td>{{ p.email }}</td>
+                    <td>
+                        <span class="badge" [class.badge--presencial]="p.tipus_entrada === 'Presencial'"
+                            [class.badge--online]="p.tipus_entrada === 'Online'"
+                            [class.badge--mentor]="p.tipus_entrada === 'Mentor'">
+                            {{ p.tipus_entrada }}
+                        </span>
+                    </td>
+                    <td>
+                        @if (p.necessitats_especials) {
+                        <span class="badge badge--special" aria-label="Si, necessita adaptacions">Si</span>
+                        } @else {
+                        <span aria-label="No necessita adaptacions">No</span>
+                        }
+                    </td>
+                    <td>{{ p.registrat_el }}</td>
+                    <td>
+                        <button class="btn btn-danger" (click)="onDelete(p.id)"
+                            [attr.aria-label]="'Eliminar participant ' + p.nom_complet">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+</main>
