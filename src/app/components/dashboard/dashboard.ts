@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ParticipantService } from '../../services/participant.service';
-import { ToastService } from '../../services/toast.service';
+import { ParticipantService } from '../../services/participant';
+import { ToastService } from '../../services/toast';
 import { ToastComponent } from '../toast.component';
 
 @Component({

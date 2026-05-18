@@ -2,30 +2,36 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Participant } from '../models/participant.model';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ParticipantService {
     private http = inject(HttpClient);
     private API = environment.apiUrl;
 
-    // Estado privado (Signals)
     private _participants = signal<Participant[]>([]);
     private _loading = signal<boolean>(false);
     private _error = signal<string | null>(null);
 
-    // Estado público (read-only)
     readonly participants = this._participants.asReadonly();
     readonly loading = this._loading.asReadonly();
     readonly error = this._error.asReadonly();
 
-    // Valores computados automáticamente
     readonly total = computed(() => this._participants().length);
+
     readonly totalNecessitats = computed(() =>
         this._participants().filter(p => p.necessitats_especials).length
     );
+
     readonly totalPresencial = computed(() =>
         this._participants().filter(p => p.tipus_entrada === 'Presencial').length
+    );
+
+    readonly totalOnline = computed(() =>
+        this._participants().filter(p => p.tipus_entrada === 'Online').length
+    );
+
+    readonly totalMentor = computed(() =>
+        this._participants().filter(p => p.tipus_entrada === 'Mentor').length
     );
 
     load(): void {
@@ -37,18 +43,23 @@ export class ParticipantService {
                 this._participants.set(res.data);
                 this._loading.set(false);
             },
-            error: () => {
-                this._error.set('No s\'han pogut carregar els participants. Comprova que l\'API està activa a http://localhost:8000.');
+            error: (e) => {
+                this._error.set('Error carregant els participants. Comprova la connexió.');
                 this._loading.set(false);
+                console.error(e);
             }
         });
     }
 
-    register(data: Omit<Participant, 'id' | 'nom_complet' | 'registrat_el'>): Observable<{ data: Participant }> {
+    register(data: Omit<Participant, 'id' | 'nom_complet' | 'registrat_el'>) {
         return this.http.post<{ data: Participant }>(`${this.API}/participants`, data);
     }
 
-    delete(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.API}/participants/${id}`);
+    create(data: Omit<Participant, 'id' | 'nom_complet' | 'registrat_el'>) {
+        return this.http.post<{ data: Participant }>(`${this.API}/participants`, data);
+    }
+
+    delete(id: number) {
+        return this.http.delete(`${this.API}/participants/${id}`);
     }
 }

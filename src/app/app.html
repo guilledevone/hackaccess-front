@@ -1,1 +1,15 @@
+<app-toast />
+
+@if (!isLanding() && !isLogin() && !isRegisterAdmin()) {
+<header class="app-header">
+  <a routerLink="/" class="app-header__logo" aria-label="HackAccess - Inici">
+    <span aria-hidden="true">◆</span>
+    <span>HackAccess</span>
+  </a>
+  <button (click)="auth.logout()" class="app-header__logout" aria-label="Tancar sessió">
+    Sortir
+  </button>
+</header>
+}
+
 <router-outlet />

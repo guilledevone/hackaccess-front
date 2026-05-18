@@ -1,0 +1,57 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 56px;
+    background: #f9f8f5;
+    border-bottom: 1px solid #d4d1ca;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: #28251d;
+        font-weight: 600;
+        font-size: 1rem;
+
+        span:first-child {
+            color: #01696f;
+        }
+
+        &:hover {
+            color: #01696f;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #01696f;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+    }
+
+    &__logout {
+        background: none;
+        border: 1px solid #d4d1ca;
+        color: #7a7974;
+        padding: 0.3rem 0.85rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 180ms ease;
+
+        &:hover {
+            border-color: #a12c7b;
+            color: #a12c7b;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #01696f;
+            outline-offset: 3px;
+        }
+    }
+}

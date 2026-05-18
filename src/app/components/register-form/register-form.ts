@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ParticipantService } from '../../services/participant.service';
-import { ToastService } from '../../services/toast.service';
+import { ParticipantService } from '../../services/participant';
+import { ToastService } from '../../services/toast';
 import { ToastComponent } from '../toast.component';
 
 @Component({
@@ -53,7 +53,7 @@ export class RegisterFormComponent {
     this.service.register(this.form.getRawValue()).subscribe({
       next: () => {
         this.toast.show('Participant registrat correctament!', 'success');
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         const msg = err.error?.message || 'Error en registrar el participant.';
