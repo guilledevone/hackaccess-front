@@ -1,10 +1,9 @@
-<a href="#main-content" class="skip-link">Saltar al formulari</a>
 
 <app-toast></app-toast>
 
 <main id="main-content" class="register" role="main">
     <header class="register__header">
-        <a routerLink="/" class="back-link" aria-label="Tornar al llistat de participants">← Tornar</a>
+        <a routerLink="/dashboard" class="back-link" aria-label="Tornar al llistat de participants">← Tornar</a>
         <h1>Registrar nou participant</h1>
     </header>
 
@@ -62,7 +61,7 @@
             <button type="submit" class="btn btn-primary" [disabled]="form.invalid && form.touched">
                 Registrar participant
             </button>
-            <a routerLink="/" class="btn btn-secondary">Cancel·lar</a>
+            <a routerLink="/dashboard" class="btn btn-secondary">Cancel·lar</a>
         </div>
     </form>
 </main>

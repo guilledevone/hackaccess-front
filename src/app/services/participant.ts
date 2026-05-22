@@ -62,4 +62,7 @@ export class ParticipantService {
     delete(id: number) {
         return this.http.delete(`${this.API}/participants/${id}`);
     }
+    update(id: number, data: Partial<Omit<Participant, 'id' | 'nom_complet' | 'registrat_el'>>) {
+    return this.http.put<Participant>(`${this.API}/participants/${id}`, data);
+}
 }

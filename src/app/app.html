@@ -2,13 +2,44 @@
 
 @if (!isLanding() && !isLogin() && !isRegisterAdmin()) {
 <header class="app-header">
-  <a routerLink="/" class="app-header__logo" aria-label="HackAccess - Inici">
+  <span class="app-header__logo" aria-label="HackAccess">
     <span aria-hidden="true">◆</span>
     <span>HackAccess</span>
-  </a>
-  <button (click)="auth.logout()" class="app-header__logout" aria-label="Tancar sessió">
-    Sortir
-  </button>
+  </span>
+
+  <div class="app-header__user" [class.open]="userMenuOpen">
+    <button
+      class="app-header__user-btn"
+      (click)="toggleUserMenu()"
+      [attr.aria-expanded]="userMenuOpen"
+      aria-haspopup="true"
+      aria-label="Menú d'usuari">
+      <span class="app-header__avatar" aria-hidden="true">
+        {{ auth.user()?.name?.charAt(0)?.toUpperCase() }}
+      </span>
+      <span class="app-header__username">{{ auth.user()?.name }}</span>
+      <svg class="app-header__chevron" width="14" height="14" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+
+    @if (userMenuOpen) {
+    <div class="app-header__dropdown" role="menu">
+      <div class="app-header__dropdown-info">
+        <span class="app-header__dropdown-name">{{ auth.user()?.name }}</span>
+        <span class="app-header__dropdown-email">{{ auth.user()?.email }}</span>
+      </div>
+      <hr class="app-header__dropdown-divider" />
+      <button
+        class="app-header__dropdown-logout"
+        (click)="auth.logout()"
+        role="menuitem">
+        Tancar sessió
+      </button>
+    </div>
+    }
+  </div>
 </header>
 }
 

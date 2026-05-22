@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -16,6 +16,7 @@ import { AuthService } from './services/auth';
 export class App {
   private router = inject(Router);
   auth = inject(AuthService);
+  userMenuOpen = false;
 
   private currentUrl = toSignal(
     this.router.events.pipe(
@@ -25,7 +26,27 @@ export class App {
     { initialValue: '/' }
   );
 
-  isLanding = () => this.currentUrl() === '/';
-  isLogin = () => this.currentUrl() === '/login';
+  isLanding       = () => this.currentUrl() === '/';
+  isLogin         = () => this.currentUrl() === '/login';
   isRegisterAdmin = () => this.currentUrl() === '/register-admin';
+
+  toggleUserMenu() {
+    this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.app-header__user')) {
+      this.userMenuOpen = false;
+    }
+  }
+
+  constructor() {
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.userMenuOpen = false;
+    });
+  }
 }

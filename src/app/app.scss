@@ -1,57 +1,154 @@
 .app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 56px;
+  background: #f9f8f5;
+  border-bottom: 1px solid #d4d1ca;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 1.5rem;
-    height: 56px;
-    background: #f9f8f5;
-    border-bottom: 1px solid #d4d1ca;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    gap: 0.5rem;
+    color: #28251d;
+    font-weight: 600;
+    font-size: 1rem;
+    // Sin text-decoration ni cursor porque ya NO es un enlace
 
-    &__logo {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
-        color: #28251d;
-        font-weight: 600;
-        font-size: 1rem;
+    span:first-child {
+      color: #01696f;
+    }
+  }
 
-        span:first-child {
-            color: #01696f;
-        }
+  // ── Zona de usuario (derecha) ──────────────────────
+  &__user {
+    position: relative;
+  }
 
-        &:hover {
-            color: #01696f;
-        }
+  &__user-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid #d4d1ca;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.65rem 0.3rem 0.4rem;
+    cursor: pointer;
+    color: #28251d;
+    font-size: 0.875rem;
+    transition: all 180ms ease;
 
-        &:focus-visible {
-            outline: 2px solid #01696f;
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
+    &:hover {
+      border-color: #01696f;
+      color: #01696f;
     }
 
-    &__logout {
-        background: none;
-        border: 1px solid #d4d1ca;
-        color: #7a7974;
-        padding: 0.3rem 0.85rem;
-        border-radius: 0.5rem;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 180ms ease;
-
-        &:hover {
-            border-color: #a12c7b;
-            color: #a12c7b;
-        }
-
-        &:focus-visible {
-            outline: 2px solid #01696f;
-            outline-offset: 3px;
-        }
+    &:focus-visible {
+      outline: 2px solid #01696f;
+      outline-offset: 3px;
+      border-radius: 0.5rem;
     }
+  }
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #01696f;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &__username {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__chevron {
+    color: #7a7974;
+    flex-shrink: 0;
+    transition: transform 180ms ease;
+
+    .open & {
+      transform: rotate(180deg);
+    }
+  }
+
+  // ── Dropdown ───────────────────────────────────────
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #d4d1ca;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+    z-index: 200;
+    animation: dropdown-in 120ms ease;
+  }
+
+  &__dropdown-info {
+    padding: 0.6rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  &__dropdown-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #28251d;
+  }
+
+  &__dropdown-email {
+    font-size: 0.8rem;
+    color: #7a7974;
+  }
+
+  &__dropdown-divider {
+    border: none;
+    border-top: 1px solid #d4d1ca;
+    margin: 0.25rem 0;
+  }
+
+  &__dropdown-logout {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: #7a7974;
+    cursor: pointer;
+    transition: all 180ms ease;
+
+    &:hover {
+      background: #f9f8f5;
+      color: #a12c7b;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #01696f;
+      outline-offset: -2px;
+    }
+  }
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

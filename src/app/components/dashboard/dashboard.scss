@@ -195,3 +195,155 @@
         font-weight: 600;
     }
 }
+// ── Columna accions ───────────────────────────────────────
+.cell-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-edit {
+    background: transparent;
+    color: #01696f;
+    border: 2px solid #01696f;
+
+    &:hover {
+        background: #01696f;
+        color: white;
+    }
+}
+
+// ── Modal ─────────────────────────────────────────────────
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(40, 37, 29, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    padding: 1rem;
+    animation: fade-in 150ms ease;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 0.75rem;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+    animation: slide-up 180ms ease;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid #d4d1ca;
+
+        h2 {
+            font-size: 1.1rem;
+            color: #28251d;
+        }
+    }
+
+    &__close {
+        background: none;
+        border: none;
+        font-size: 1.1rem;
+        color: #7a7974;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        line-height: 1;
+
+        &:hover { color: #28251d; }
+        &:focus-visible {
+            outline: 2px solid #01696f;
+            outline-offset: 2px;
+        }
+    }
+
+    &__form {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        padding-top: 0.5rem;
+    }
+}
+
+// Reutiliza los estilos de .field del register-form
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #28251d;
+    }
+
+    input, select {
+        padding: 0.55rem 0.75rem;
+        border: 1px solid #d4d1ca;
+        border-radius: 0.5rem;
+        font-size: 0.95rem;
+        color: #28251d;
+        background: #fff;
+        transition: border-color 180ms ease;
+
+        &:focus {
+            outline: none;
+            border-color: #01696f;
+            box-shadow: 0 0 0 3px rgba(1, 105, 111, 0.12);
+        }
+    }
+
+    &--checkbox {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.6rem;
+
+        input[type="checkbox"] {
+            margin-top: 0.2rem;
+            width: 16px;
+            height: 16px;
+            accent-color: #01696f;
+        }
+    }
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #7a7974;
+    border: 2px solid #d4d1ca;
+
+    &:hover {
+        border-color: #7a7974;
+        color: #28251d;
+    }
+}
+
+.required { color: #a12c7b; }
+.hint     { font-size: 0.8rem; color: #7a7974; display: block; }
+.error    { font-size: 0.8rem; color: #a12c7b; }
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
