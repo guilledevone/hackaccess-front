@@ -9,7 +9,7 @@ export const routes: Routes = [
                 .then(m => m.LandingComponent)
     },
     {
-        path: 'register-admin',   // ← NUEVA, pública
+        path: 'register-admin',   // Ruta pública adicional
         loadComponent: () =>
             import('./components/register-admin/register-admin')
                 .then(m => m.RegisterAdminComponent)

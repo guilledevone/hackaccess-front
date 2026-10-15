@@ -97,7 +97,7 @@
     <div class="modal" (click)="$event.stopPropagation()">
         <header class="modal__header">
             <h2 id="modal-title">Editar participant</h2>
-            <button class="modal__close" (click)="onCancelEdit()" aria-label="Tancar">✕</button>
+            <button class="modal__close" (click)="onCancelEdit()" aria-label="Tancar">Tancar</button>
         </header>
 
         <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit()" class="modal__form" novalidate>
