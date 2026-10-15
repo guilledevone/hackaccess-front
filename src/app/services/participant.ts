@@ -30,9 +30,6 @@ export class ParticipantService {
         this._participants().filter(p => p.tipus_entrada === 'Online').length
     );
 
-    readonly totalMentor = computed(() =>
-        this._participants().filter(p => p.tipus_entrada === 'Mentor').length
-    );
 
     load(): void {
         this._loading.set(true);
@@ -63,6 +60,6 @@ export class ParticipantService {
         return this.http.delete(`${this.API}/participants/${id}`);
     }
     update(id: number, data: Partial<Omit<Participant, 'id' | 'nom_complet' | 'registrat_el'>>) {
-    return this.http.put<Participant>(`${this.API}/participants/${id}`, data);
-}
+        return this.http.put<Participant>(`${this.API}/participants/${id}`, data);
+    }
 }

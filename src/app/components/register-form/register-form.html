@@ -1,4 +1,3 @@
-
 <app-toast></app-toast>
 
 <main id="main-content" class="register" role="main">
@@ -44,7 +43,6 @@
                     [attr.aria-invalid]="isInvalid('tipus_entrada')">
                     <option value="Presencial">Presencial</option>
                     <option value="Online">Online</option>
-                    <option value="Mentor">Mentor</option>
                 </select>
             </div>
 
@@ -61,7 +59,7 @@
             <button type="submit" class="btn btn-primary" [disabled]="form.invalid && form.touched">
                 Registrar participant
             </button>
-            <a routerLink="/dashboard" class="btn btn-secondary">Cancel·lar</a>
+            <a routerLink="/dashboard" class="btn btn-secondary" aria-label="Cancel·lar">Cancel·lar</a>
         </div>
     </form>
 </main>
