@@ -82,6 +82,7 @@
         font-size: 1rem;
         color: #28251d;
         background: white;
+        box-sizing: border-box;
 
         &:focus {
             outline: 3px solid #01696f;
@@ -115,7 +116,7 @@
     .hint {
         display: block;
         font-size: 0.85rem;
-        color: #7a7974;
+        color: #5c5955;
         font-weight: 400;
         margin-top: 0.25rem;
     }
@@ -168,7 +169,7 @@
 
 .btn-secondary {
     background: transparent;
-    color: #7a7974;
+    color: #5c5955;
     border-color: #d4d1ca;
 
     &:hover {

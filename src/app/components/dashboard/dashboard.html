@@ -4,7 +4,7 @@
     <header class="dashboard__header">
         <h1>HackAccess — Llistat de participants</h1>
         <a routerLink="/register" class="btn btn-primary" aria-label="Registrar nou participant">
-            + Nou participant
+            Nou participant
         </a>
     </header>
 
@@ -42,7 +42,9 @@
                     <th scope="col">Tipus</th>
                     <th scope="col">Necessitats especials</th>
                     <th scope="col">Registrat</th>
+                    @if (isAdmin) {
                     <th scope="col">Accions</th>
+                    }
                 </tr>
             </thead>
             <tbody>

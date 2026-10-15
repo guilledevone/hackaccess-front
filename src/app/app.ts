@@ -1,5 +1,5 @@
 import { Component, inject, HostListener } from '@angular/core';
-import { Router, RouterOutlet, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
@@ -9,7 +9,7 @@ import { AuthService } from './services/auth';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, ToastComponent],
+  imports: [RouterOutlet, CommonModule, ToastComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
